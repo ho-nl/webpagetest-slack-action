@@ -62,15 +62,20 @@ async function renderComment(data) {
         markdown
             .replace(/\%/g, '%25')
             .replace(/\n/g, '%0A')
-            .replace(/\r/g, '%0D')    
+            .replace(/\r/g, '%0D')
 
-        //submit a comment
-        await octokit.issues.createComment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: context.payload.pull_request.number,
-            body: markdown
-        });
+        if (GH_EVENT_NAME == 'pull_request') {
+            //submit a comment
+            await octokit.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body: markdown
+            });
+        }
+        else {
+            core.setOutput('results', runData);
+        }
     } catch (e) {
         core.setFailed(`Action failed with error ${e}`);
     }
@@ -95,10 +100,6 @@ function collectData(results, runData) {
     runData["tests"].push(testData);
 }
 async function run() {
-    core.info(`dit is een test`);
-    core.setOutput('testing', 'variable passing test');
-    return;
-
     const wpt = new WebPageTest('www.webpagetest.org',WPT_API_KEY);
 
     //TODO: make this configurable
@@ -185,9 +186,7 @@ async function run() {
                 core.setFailed(`Action failed with error ${e}`);
             }
     })).then(() => {
-        if (GH_EVENT_NAME == 'pull_request') {
-            renderComment(runData);
-        }
+        renderComment(runData);
     });
     
     return;
