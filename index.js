@@ -96,7 +96,7 @@ function collectData(results, runData) {
 }
 async function run() {
     core.info(`dit is een test`);
-    core.setOutput('dit is een test');
+    core.setOutput('testing', 'variable passing test');
     return;
 
     const wpt = new WebPageTest('www.webpagetest.org',WPT_API_KEY);
