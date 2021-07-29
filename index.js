@@ -74,7 +74,7 @@ async function renderComment(data) {
             });
         }
         else {
-            core.setOutput('results', data);
+            core.setOutput('results', markdown);
         }
     } catch (e) {
         core.setFailed(`Action failed with error ${e}`);
