@@ -133,7 +133,7 @@ async function run() {
     }
 
     core.startGroup('Test');
-    core.info(`Using token: ${WPT_API_KEY}`);
+    core.info(WPT_API_KEY);
     core.endGroup();
 
     core.startGroup('WebPageTest Configuration');
