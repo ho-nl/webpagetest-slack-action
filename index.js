@@ -74,7 +74,7 @@ async function renderComment(data) {
             });
         }
         else {
-            core.setOutput('results', runData);
+            core.setOutput('results', data);
         }
     } catch (e) {
         core.setFailed(`Action failed with error ${e}`);
@@ -131,10 +131,6 @@ async function run() {
     if (WPT_LABEL) {
         options.label = WPT_LABEL;
     }
-
-    core.startGroup('Test');
-    core.info(WPT_API_KEY);
-    core.endGroup();
 
     core.startGroup('WebPageTest Configuration');
     core.info(`WebPageTest settings: ${JSON.stringify(options, null, '  ')}`)
