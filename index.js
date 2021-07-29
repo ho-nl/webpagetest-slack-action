@@ -95,6 +95,10 @@ function collectData(results, runData) {
     runData["tests"].push(testData);
 }
 async function run() {
+    core.info(`dit is een test`);
+    core.setOutput('dit is een test');
+    return;
+
     const wpt = new WebPageTest('www.webpagetest.org',WPT_API_KEY);
 
     //TODO: make this configurable
@@ -146,12 +150,10 @@ async function run() {
                             core.info('Tests successfully completed for '
                                         + url +'. Full results at https://'
                                         + wpt.config.hostname + '/result/' + result.result.testId);
-                            
-                            if (GH_EVENT_NAME == 'pull_request') {
-                                let testResults = await retrieveResults(wpt, result.result.testId);
-                                collectData(testResults, runData);
-                                
-                            }
+
+                            let testResults = await retrieveResults(wpt, result.result.testId);
+                            collectData(testResults, runData);
+
                             // testspecs also returns the number of assertion fails as err
                             // > 0 means we need to fail
                             if (result.err && result.err > 0) {
@@ -166,11 +168,10 @@ async function run() {
                             //test was submitted without testspecs
                             core.info('Tests successfully completed for ' + url
                                 +'. Full results at ' + result.result.data.summary);
-                            
-                            if (GH_EVENT_NAME == 'pull_request') {
-                                let testResults = await retrieveResults(wpt, result.result.data.id);
-                                collectData(testResults, runData);
-                            }
+
+                            let testResults = await retrieveResults(wpt, result.result.data.id);
+                            collectData(testResults, runData);
+
                             return;
                         } else {
                             return;
