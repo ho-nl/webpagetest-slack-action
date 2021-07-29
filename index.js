@@ -102,10 +102,6 @@ function collectData(results, runData) {
 async function run() {
     const wpt = new WebPageTest('www.webpagetest.org',WPT_API_KEY);
 
-    core.startGroup('Test');
-    core.info(`Using token: ${WPT_API_KEY}`);
-    core.endGroup();
-
     //TODO: make this configurable
     let options = {
         "firstViewOnly": true,
@@ -135,6 +131,10 @@ async function run() {
     if (WPT_LABEL) {
         options.label = WPT_LABEL;
     }
+
+    core.startGroup('Test');
+    core.info(`Using token: ${WPT_API_KEY}`);
+    core.endGroup();
 
     core.startGroup('WebPageTest Configuration');
     core.info(`WebPageTest settings: ${JSON.stringify(options, null, '  ')}`)
