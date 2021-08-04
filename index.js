@@ -164,6 +164,8 @@ async function run() {
                                         + wpt.config.hostname + '/result/' + result.result.testId);
 
                             let testResults = await retrieveResults(wpt, result.result.testId);
+
+                            core.info('Performance budget info: ' + result.err);
                             collectData(testResults, runData, result.err);
 
                             if (GH_EVENT_NAME == 'pull_request') {
