@@ -178,12 +178,12 @@ async function run() {
                             return;
                         }
                     } catch (e) {
-                        core.setFailed(`Action failed with error ${e}`);
+                        core.setFailed(`Action failed with error inside ${e}`);
                     }
                     
                 });
             } catch (e) {
-                core.setFailed(`Action failed with error ${e}`);
+                core.setFailed(`Action failed with error outside ${e}`);
             }
     })).then(() => {
         renderComment(runData);
