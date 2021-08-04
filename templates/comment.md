@@ -1,4 +1,4 @@
-*<%- WPT_LABEL %>*
+*<%- label %>*
 <% tests.forEach((test) => { %>
 ## Page Tested:<%- test.url %>
 <% test.metrics.forEach((metric) => { %>*<%- metric.name %>*: <%- metric.value %>\n  <% }); %>

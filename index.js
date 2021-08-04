@@ -140,6 +140,7 @@ async function run() {
     //for our commit
     let runData = {};
     runData["tests"] = [];
+    runData["label"] = WPT_LABEL;
 
     Promise.all(WPT_URLS.map(async url=> {
         try {
