@@ -166,6 +166,18 @@ async function run() {
                             let testResults = await retrieveResults(wpt, result.result.testId);
                             collectData(testResults, runData, result.err);
 
+                            if (GH_EVENT_NAME == 'pull_request') {
+                                // testspecs also returns the number of assertion fails as err
+                                // > 0 means we need to fail
+                                if (result.err && result.err > 0) {
+                                    if (result.err == 1) {
+                                        core.setFailed('One performance budget not met.')
+                                    } else {
+                                        core.setFailed(result.err + ' performance budgets not met.')
+                                    }
+                                }
+                            }
+
                             return;
                         } else if (result.result.data) {
                             //test was submitted without testspecs
