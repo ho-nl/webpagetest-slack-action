@@ -55,11 +55,11 @@ const retrieveResults = (wpt, testId) => {
 }
 async function renderComment(data) {
     try {
+        let markdown = await ejs.renderFile(`${__dirname}/templates/comment.md`, data);
+
         if (GH_EVENT_NAME == 'pull_request') {
             const octokit = github.getOctokit(GITHUB_TOKEN, {log: console});
             const context = github.context;
-
-            let markdown = await ejs.renderFile(`${__dirname}/templates/comment.md`, data);
             markdown
                 .replace(/\%/g, '%25')
                 .replace(/\n/g, '%0A')
