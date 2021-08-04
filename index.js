@@ -77,7 +77,7 @@ async function renderComment(data) {
             core.setOutput('results', markdown);
         }
     } catch (e) {
-        core.setFailed(`Action failed with error ${e}`);
+        core.setFailed(`Action failed with error comment ${e}`);
     }
 }
 function collectData(results, runData) {
