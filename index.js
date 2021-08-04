@@ -80,7 +80,7 @@ async function renderComment(data) {
         core.setFailed(`Action failed with error comment ${e}`);
     }
 }
-function collectData(results, runData) {
+function collectData(results, runData, specResults) {
     let testData = {
         "url": results.data.url,
         "testLink": results.data.summary,
@@ -97,6 +97,16 @@ function collectData(results, runData) {
             })
         }
     };
+
+    // testspecs also returns the number of assertion fails as err
+    // > 0 means we need to fail
+    if (specResults.err && specResults.err > 0) {
+        testData.specResults = result.err + ' performance budgets not met.';
+    }
+    else {
+        testData.specResults = 'No performance budgets were exceeded';
+    }
+
     runData["tests"].push(testData);
 }
 async function run() {
@@ -154,17 +164,8 @@ async function run() {
                                         + wpt.config.hostname + '/result/' + result.result.testId);
 
                             let testResults = await retrieveResults(wpt, result.result.testId);
-                            collectData(testResults, runData);
+                            collectData(testResults, runData, result.err);
 
-                            // testspecs also returns the number of assertion fails as err
-                            // > 0 means we need to fail
-                            if (result.err && result.err > 0) {
-                                if (result.err == 1) {
-                                    core.setFailed('One performance budget not met.')
-                                } else {
-                                    core.setFailed(result.err + ' performance budgets not met.')
-                                }
-                            }
                             return;
                         } else if (result.result.data) {
                             //test was submitted without testspecs
@@ -172,7 +173,7 @@ async function run() {
                                 +'. Full results at ' + result.result.data.summary);
 
                             let testResults = await retrieveResults(wpt, result.result.data.id);
-                            collectData(testResults, runData);
+                            collectData(testResults, runData, result.err);
 
                             return;
                         } else {
