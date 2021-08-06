@@ -158,7 +158,7 @@ async function run() {
                             let testResults = await retrieveResults(wpt, result.result.testId);
 
                             core.info('Performance budget info: ' + result.err);
-                            collectData(testResults, runData, result.err);
+                            collectData(testResults, runData, result);
 
                             if (GH_EVENT_NAME == 'pull_request') {
                                 // testspecs also returns the number of assertion fails as err
@@ -180,7 +180,7 @@ async function run() {
 
                             let testResults = await retrieveResults(wpt, result.result.data.id);
                             core.info('Performance budget info: ' + result.err);
-                            collectData(testResults, runData, result.err);
+                            collectData(testResults, runData, result);
 
                             return;
                         } else {
