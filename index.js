@@ -98,15 +98,7 @@ function collectData(results, runData, specResults) {
         }
     };
 
-    // testspecs also returns the number of assertion fails as err
-    // > 0 means we need to fail
-    if (specResults.err && specResults.err > 0) {
-        testData.specResults = result.err + ' performance budgets not met.';
-    }
-    else {
-        testData.specResults = 'No performance budgets were exceeded';
-    }
-
+    testData.budgetsExceeded = specResults.err && specResults.err > 0;
     runData["tests"].push(testData);
 }
 async function run() {
