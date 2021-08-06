@@ -187,6 +187,7 @@ async function run() {
                                 +'. Full results at ' + result.result.data.summary);
 
                             let testResults = await retrieveResults(wpt, result.result.data.id);
+                            core.info('Performance budget info: ' + result.err);
                             collectData(testResults, runData, result.err);
 
                             return;
