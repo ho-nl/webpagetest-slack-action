@@ -52,6 +52,11 @@ jobs:
    
 The WPT_API_KEY and GITHUB_TOKEN are secrets on the organization level, so you don't need to add anything to your repository.
 
+3. Slack configuration
+Use the 'slack-channel' property to define to which channel the report needs to be posted.
+   
+You also need to invite the bot/app 'WebPageTest' to your channel.
+
 3. Budget and options files 
 
 Use the wptOptions to customize how you want to run the tests.
