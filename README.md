@@ -87,9 +87,10 @@ The action is triggered by the repository_dispatch event.
 Our development pipeline is not (yet) fully running on Github Actions, the below
 snippet can be used to manually trigger the event. You can also add the snippet as a separate build step 'execute shell'
 
+The token can be found in 1Pass under 'WebPageTest Github Token'
 ```
 curl --request POST \
---url 'https://api.github.com/repos/timhofman/rd-webpagetest/dispatches' \
+--url 'https://api.github.com/repos/ho-nl/<your_repos>/dispatches' \
     --header 'authorization: Bearer <github_token>' \
       --data '{"event_type": "frontend-performance-test"}'
 ```
