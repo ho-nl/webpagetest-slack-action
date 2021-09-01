@@ -1,8 +1,6 @@
 *<%- label %>*
 <% tests.forEach((test) => { %>
->Page: <%- test.url %> *(<%if (test.budgetsExceeded) { %>Exceeds budgets<% } else { %>Meets budgets<% } %>)*
-><% test.metrics.forEach((metric) => { %>\n>*<%- metric.name %>*: <%- metric.value %><% }); %>
->
-> Full result: <%- test.testLink %>
+><%- test.url %>: *(<%if (test.budgetsExceeded) { %>Exceeds budgets<% } else { %>Meets budgets<% } %>) - [Full result](<%- test.testLink %>) \n
+><% test.metrics.forEach((metric, key) => { %>\n>*<%- metric.name.match(/\b(\w)/g).join('') %>*: <%- parseFloat(metric.value).toFixed(3) %><% if (test.metrics.length -1 !== key) {%>, <% }}); %>
 
 <% }); %>
