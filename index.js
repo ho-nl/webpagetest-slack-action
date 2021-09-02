@@ -55,6 +55,18 @@ const retrieveResults = (wpt, testId) => {
 }
 async function renderComment(data) {
     try {
+        let overBudget = false
+        data.tests.forEach((test, index) => {
+            if (test.budgetsExceeded) {
+                overBudget = true
+            } else {
+                data.tests.splice(index, 1)
+            }
+        })
+        if (!overBudget) {
+            core.info('No over budget tests')
+            return
+        }
         let markdown = await ejs.renderFile(`${__dirname}/templates/comment.md`, data);
         markdown
             .replace(/\%/g, '%25')
