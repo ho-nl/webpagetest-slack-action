@@ -57,15 +57,12 @@ async function renderComment(data) {
     try {
         let overBudget = false
         const overBudgetTests = data["tests"].map((test, index) => {
-            core.info(!!test.budgetsExceeded)
-            core.info(index)
             if (test.budgetsExceeded) {
                 overBudget = true
                 return test
             }
         })
         data["tests"] = overBudgetTests
-        core.info(overBudgetTests.length)
         if (!overBudget) {
             core.info('No over budget tests')
             return
