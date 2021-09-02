@@ -56,8 +56,9 @@ const retrieveResults = (wpt, testId) => {
 async function renderComment(data) {
     try {
         let overBudget = false
-        core.info(data["tests"])
         data["tests"].forEach((test, index) => {
+            core.info(test.budgetsExceeded)
+            core.info(index)
             if (test.budgetsExceeded) {
                 overBudget = true
             } else {
