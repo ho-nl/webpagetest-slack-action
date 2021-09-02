@@ -59,7 +59,11 @@ async function renderComment(data) {
         data["tests"] = data["tests"].map((test, index) => {
             core.info(test.budgetsExceeded)
             core.info(index)
-            core.info(test)
+            test["metrics"].forEach((metric) => {
+                core.info(metric)
+                core.info(metric["name"])
+                core.info(metric["value"])
+            })
             if (test.budgetsExceeded) {
                 overBudget = true
                 return test
