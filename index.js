@@ -198,12 +198,12 @@ async function run() {
                             return;
                         }
                     } catch (e) {
-                        core.setFailed(`Action failed with error inside ${e}`);
+                        core.setFailed(`Action failed with error inside ${JSON.stringify(e)}`);
                     }
                     
                 });
             } catch (e) {
-                core.setFailed(`Action failed with error outside ${e.message}`);
+                core.setFailed(`Action failed with error outside ${JSON.stringify(e)}`);
             }
     })).then(() => {
         renderComment(runData);
