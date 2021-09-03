@@ -169,6 +169,7 @@ async function run() {
                             let testResults = await retrieveResults(wpt, result.result.testId);
 
                             core.info('Performance budget info: ' + result.err);
+                            core.info(JSON.stringify(result))
                             collectData(testResults, runData, result);
 
                             if (GH_EVENT_NAME == 'pull_request') {
