@@ -1,0 +1,6 @@
+{
+  "runs": 1,
+  "location": "gce-europe-west4:Chrome;iPhone6",
+  "connectivity": "3G",
+  "emulateMobile": true
+}

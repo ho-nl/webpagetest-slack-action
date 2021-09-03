@@ -192,7 +192,7 @@ async function run() {
                     
                 });
             } catch (e) {
-                core.setFailed(`Action failed with error outside ${e}`);
+                core.setFailed(`Action failed with error outside ${e.message}`);
             }
     })).then(() => {
         renderComment(runData);
