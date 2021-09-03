@@ -75,7 +75,9 @@ A test will be marked in Slack when it exceeds the provided budgets
 {
   "median": {
     "firstView": {
-      "firstContentfulPaint": 1000
+      "chromeUserTiming.CumulativeLayoutShift": 0.1,
+      "chromeUserTiming.LargestContentfulPaint": 2500,
+      "TotalBlockingTime": 300
     }
   }
 }

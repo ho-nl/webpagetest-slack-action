@@ -169,6 +169,7 @@ async function run() {
                             let testResults = await retrieveResults(wpt, result.result.testId);
 
                             core.info('Performance budget info: ' + result.err);
+                            core.info(JSON.stringify(result))
                             collectData(testResults, runData, result);
 
                             if (GH_EVENT_NAME == 'pull_request') {
@@ -198,12 +199,13 @@ async function run() {
                             return;
                         }
                     } catch (e) {
-                        core.setFailed(`Action failed with error inside ${e}`);
+                        core.setFailed(`Action failed with error inside ${JSON.stringify(e)}`);
                     }
                     
                 });
             } catch (e) {
-                core.setFailed(`Action failed with error outside ${e}`);
+                core.setOutput('results', `Tests failed to run: ${e.error.message}`);
+                core.setFailed(`Action failed with error outside ${JSON.stringify(e)}`);
             }
     })).then(() => {
         renderComment(runData);
