@@ -122,7 +122,6 @@ async function run() {
         "location": 'Dulles:Chrome',
         "connectivity": '4G',
         "pollResults": 5,
-        "timeout": 240,
         "emulateMobile": true
     }
     if (WPT_OPTIONS) {
