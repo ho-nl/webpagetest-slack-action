@@ -101,7 +101,7 @@ function collectData(results, runData, specResults) {
     for (const [key, value] of Object.entries(METRICS)) {
         core.debug(key);
         core.debug(value);
-        if (results.data.median.firstView[key]) {
+        if (results.data.median.firstView[key] || results.data.median.firstView[key] === 0) {
             testData.metrics.push({
                 "name": value,
                 "value": results.data.median.firstView[key]
