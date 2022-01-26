@@ -56,17 +56,15 @@ const retrieveResults = (wpt, testId) => {
 async function renderComment(data) {
     try {
         data["tests"].sort((a, b) => {
-            if (a.url === WPT_URLS[0]) {
-                return -1
-            } else if (a.url === WPT_URLS[1]) {
-                if (b.url === WPT_URLS[0]) {
-                    return 1
-                } else {
-                    return -1
+            return WPT_URLS.findIndex((url) => {
+                if (a.url === url) {
+                    return true
                 }
-            } else {
-                return 1
-            }
+            }) - WPT_URLS.findIndex((url) => {
+                if (b.url === url) {
+                    return true
+                }
+            })
         })
 
         let overBudget = false
