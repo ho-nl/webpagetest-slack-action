@@ -20,8 +20,8 @@ inputs:
   GITHUB_TOKEN:
     description: 'Secret GitHub Token (automatically provided by GitHub)'
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: 'node20'
+  main: 'dist/index.js'
 branding:
   icon: 'bar-chart-2'
   color: 'blue'
