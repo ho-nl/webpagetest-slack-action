@@ -6,7 +6,12 @@ const { cornflowerblue } = require("color-name");
 const { keyword } = require("color-convert");
 
 const WPT_BUDGET = core.getInput('budget');
-const WPT_OPTIONS = core.getInput('wptOptions');
+const WPT_OPTIONS = core.getInput('wptOptions') ?? {
+    "runs": 3,
+    "location": "gce-europe-west4:Chrome;",
+    "connectivity": "Cable",
+    "emulateMobile": false
+  }
 const WPT_API_KEY = core.getInput('apiKey');
 const WPT_URLS = core.getInput('urls').split("\n");
 const WPT_LABEL = core.getInput('label');
@@ -128,7 +133,7 @@ async function run() {
     if (!WPT_API_KEY) {
         core.setFailed('No API key provided');
     }
-    core.info('api key:',WPT_API_KEY);
+    core.info('Api key: ' + WPT_API_KEY);
     const wpt = new WebPageTest('www.webpagetest.org',WPT_API_KEY);
 
     //TODO: make this configurable
