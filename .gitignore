@@ -1,3 +1,2 @@
 .secrets
 .github/workflows/local.yml
-node_modules/
