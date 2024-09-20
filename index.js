@@ -215,7 +215,7 @@ async function run() {
                     
                 });
             } catch (e) {
-                core.setOutput('results', `Tests failed to run: ${e.error.message}`);
+                core.setOutput('results', `Tests failed to run: ${e.statusText}`);
                 core.setFailed(`Action failed with error outside ${JSON.stringify(e)}`);
             }
     })).then(() => {
