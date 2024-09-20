@@ -125,6 +125,10 @@ function collectData(results, runData, specResults) {
     runData["tests"].push(testData);
 }
 async function run() {
+    if (!WPT_API_KEY) {
+        core.setFailed('No API key provided');
+    }
+    core.info('api key:',WPT_API_KEY);
     const wpt = new WebPageTest('www.webpagetest.org',WPT_API_KEY);
 
     //TODO: make this configurable
