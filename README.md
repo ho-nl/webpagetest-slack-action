@@ -8,6 +8,10 @@ You can set and enforce performance budgets, and have performance data automatic
 - Set and enforce budgets for any metric WebPageTest can surface (spoiler alert: there are a lot)
 - Complete control over WebPageTest test settings (authentication, custom metrics, scripting, etc)
 
+## Building the Action
+
+Follow the instrictions found here: https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-javascript-action#commit-tag-and-push-your-action-to-github
+
 ## Using the Action
 
 1. Create a `.github/workflows/frontend-performance.yml` file in your repository with the following settings:
@@ -99,3 +103,4 @@ curl --request POST \
 
 5. Run mobile and desktop tests
 You can run separate tests for mobile and desktop by duplicating the steps in your action file and provide it with separate budget and options files.
+
