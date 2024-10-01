@@ -32,7 +32,7 @@ const runTest = (wpt, url, options) => {
 
     return new Promise((resolve, reject) => {
         core.info(`Submitting test for ${url} ...`);
-        wpt.runTest(url, tempOptions, async(err, result) => {
+        wpt.runTestAndWait(url, tempOptions, async(err, result) => {
             try {
                 if (result) {
                     core.debug(result);
@@ -140,7 +140,7 @@ async function run() {
     let options = {
         "firstViewOnly": true,
         "runs": 3,
-        "location": 'Dulles:Chrome',
+        "location": 'AMS_NL_02:Chrome',
         "connectivity": '4G',
         "pollResults": 5,
         "emulateMobile": true
